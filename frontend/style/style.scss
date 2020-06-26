@@ -1,0 +1,230 @@
+$background: #130A1F;
+$nav: #1D1128;
+$nav_text: #EDCDED;
+$other_text: #CCC9DC;
+$card: #1D1128;
+$main-text: #EDCDED;
+$button: #776D7E;
+$button_text: #10021B;
+$borders: #4F0147;
+$button_active: #1D1128;
+$card-zloty: #1D1128;
+$card-dolar: #1D1128;
+$card-euro: #1D1128;
+$card-funt: #1D1128;
+$card-frank: #1D1128;
+$table-row-first: #130A1F;
+$table-row-second: #1D1128;
+$separate-lines: #1B2A41;
+
+body {
+  background-color: $background;
+  font-family: 'Sarabun', sans-serif;
+}
+
+// --------- navbar styling --------- //
+
+#mainNav a{
+  color: $main-text;
+  font-size: 20px;
+}
+
+#mainNav a:hover{
+  color: $main-text;
+  font-size: 21px;
+  text-decoration: none;
+}
+
+.img-navbar{
+  font-size: 40px;
+}
+
+.navbar-main-text{
+  color: $main-text;
+  font-size: 27px;
+}
+
+.nav-bg-custom{
+  background-color: $nav;
+  color: $nav_text;
+}
+
+
+// --------- cards with currency rate styling --------- //
+
+.cardsTodayRate{
+  background-color: $card-dolar;
+  margin-top: 110px;
+  height: 160px;
+  border-radius: 5px;
+  color: $other_text;
+}
+
+.today{
+  text-align: left;
+  padding: 0;
+  font-size: 14px;
+  color: $button;
+}
+
+.curr-name{
+  text-align: left;
+  padding: 0;
+  font-size: 17px;
+}
+
+.curr-rate{
+  text-align: right;
+  font-size: 14px;
+}
+.my-1{
+  background-color: $separate-lines;
+}
+
+p {
+  margin: 1px;
+}
+
+
+
+/* --------- card with forms styling ---------- */
+.card{
+  margin-top: 60px;
+  height: 220px;
+  background-color: $card;
+  color: $other_text;
+  border-radius: 5px;
+}
+
+.card-main-text{
+  color: $main-text;
+  font-size: 35px;
+  align-content: center;
+  margin-bottom: 15px
+}
+
+#data:focus{
+  border: 2px solid $borders;
+  box-shadow: none;
+}
+
+#rate-type:focus{
+  border: 2px solid $borders;
+  box-shadow: none;
+}
+
+#currency:focus{
+  border: 2px solid $borders;
+  box-shadow: none;
+}
+
+
+/* --------- button styling ---------- */
+.btn-custom{
+  margin-top: 30px;
+  background-color: $button;
+  color:$button_text;
+  font-size: 20px;
+  width: 140px;
+}
+
+.btn-custom:hover{
+    background: $button;
+    border: 1px solid $borders;
+    color: $other_text;
+}
+
+.btn-custom:active{
+    background: $button_active;
+    box-shadow: none;
+    color: $button_text;
+}
+
+.btn-custom:focus{
+  background: $button;
+  color: $button_text;
+  box-shadow: none;
+  border: 1px solid $borders;
+}
+
+/* --------- table styling ---------- */
+.table{
+  margin-top: 50px;
+  color: $other_text;
+}
+
+.table.table-condensed tr th {
+   border-bottom: 1px solid $separate-lines;
+   border-top: none
+}
+
+.table.table-condensed tr td {
+   border-bottom: 1px solid $separate-lines;
+}
+
+
+
+/* --------- icons styling ---------- */
+
+.img-usa{
+  height: 50px;
+  width: 50px;
+}
+
+.img-eu{
+  height: 50px;
+  width: 50px;
+}
+
+.img-uk{
+  height: 50px;
+  width: 50px;
+}
+
+.img-switz{
+  height: 50px;
+  width: 50px;
+}
+
+.fa-arrow-up{
+  height: 20px;
+  width: 20px;
+  color: green;
+}
+
+.fa-arrow-down{
+  height: 20px;
+  width: 20px;
+  color: red;
+}
+
+.fa-angle-double-down{
+  color: $main-text;
+}
+
+/* --------- alerts styling ---------- */
+
+.modal-content{
+  background-color: white;
+  color: #450920;
+}
+
+.modal-header{
+  border-bottom-color: $separate-lines
+}
+
+.modal-title{
+  font-size: 25px
+}
+
+.modal-body{
+  font-size: 18px;
+}
+
+.about-text{
+  padding: 7px
+}
+
+.alert{
+  font-size: 17px
+}
