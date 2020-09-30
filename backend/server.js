@@ -40,7 +40,6 @@ async function getList(res){
 
 // -------process request from client - object with data to present-------//
 async function getTable(params, res){
-  console.log(params)
   const resultObject = await askingRatesCache.processReceivedData(params)
 
   res.statusCode = 200;

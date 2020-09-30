@@ -32,7 +32,6 @@ function getCurrencyList(){
 }
 
 function getTableType(curr){
-  console.log(tableType)
   return tableType[curr.toLowerCase()]
 }
 

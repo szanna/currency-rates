@@ -8,7 +8,6 @@ var hd = new Holidays('PL')
 const cacheAvg = {}
 
 async function requestNBPAvg(curr, from, to){
-  console.log('https://api.nbp.pl/api/exchangerates/rates/' + tableType(curr) + '/' + curr + '/' + from + '/' + to + '/?format=json')
   const url = 'https://api.nbp.pl/api/exchangerates/rates/' + tableType(curr) + '/' + curr + '/' + from + '/' + to + '/?format=json'
   const askingDay = await httpGet(url)
   let askingAvgObject
