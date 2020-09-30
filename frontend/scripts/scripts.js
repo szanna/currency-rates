@@ -51,21 +51,21 @@ function currencyListDropdown(data){
 }
 
 function showMainCurrienciesRates(data){
-  $('#usd #mid').text(data.usd.mid)
-  $('#usd #bid').text(data.usd.bid)
-  $('#usd #ask').text(data.usd.ask)
+  $('#usd #usd-mid').text(data.usd.mid)
+  $('#usd #usd-bid').text(data.usd.bid)
+  $('#usd #usd-ask').text(data.usd.ask)
 
-  $('#eur #mid').text(data.eur.mid)
-  $('#eur #bid').text(data.eur.bid)
-  $('#eur #ask').text(data.eur.ask)
+  $('#eur #eur-mid').text(data.eur.mid)
+  $('#eur #eur-bid').text(data.eur.bid)
+  $('#eur #eur-ask').text(data.eur.ask)
 
-  $('#gbp #mid').text(data.gbp.mid)
-  $('#gbp #bid').text(data.gbp.bid)
-  $('#gbp #ask').text(data.gbp.ask)
+  $('#gbp #gbp-mid').text(data.gbp.mid)
+  $('#gbp #gbp-bid').text(data.gbp.bid)
+  $('#gbp #gbp-ask').text(data.gbp.ask)
 
-  $('#chf #mid').text(data.chf.mid)
-  $('#chf #bid').text(data.chf.bid)
-  $('#chf #ask').text(data.chf.ask)
+  $('#chf #chf-mid').text(data.chf.mid)
+  $('#chf #chf-bid').text(data.chf.bid)
+  $('#chf #chf-ask').text(data.chf.ask)
 }
 
 function showDiffRates(data){
@@ -74,21 +74,21 @@ function showDiffRates(data){
 
   function showArrow(data, curr){
     if(data[curr].diffMid<0){
-      $('#'+ curr +' #arrow-mid').html(arrowDown)
+      $('#'+ curr + ' #' + curr + '-arrow-mid').html(arrowDown)
     } else if(data[curr].diffMid>0) {
-      $('#' + curr + ' #arrow-mid').html(arrowUp)
+      $('#' + curr + ' #' + curr + '-arrow-mid').html(arrowUp)
     }
 
     if(data[curr].diffBid<0){
-      $('#'+ curr +' #arrow-bid').html(arrowDown)
+      $('#'+ curr + ' #' + curr + '-arrow-bid').html(arrowDown)
     } else if(data[curr].diffBid>0) {
-      $('#'+ curr +' #arrow-bid').html(arrowUp)
+      $('#'+ curr + ' #' + curr + '-arrow-bid').html(arrowUp)
     }
 
     if(data[curr].diffAsk<0){
-      $('#'+ curr +' #arrow-ask').html(arrowDown)
+      $('#'+ curr + ' #' + curr + '-arrow-ask').html(arrowDown)
     } else if(data[curr].diffAsk>0) {
-      $('#'+ curr +' #arrow-ask').html(arrowUp)
+      $('#'+ curr + ' #' + curr + '-arrow-ask').html(arrowUp)
     }
   }
 
@@ -192,7 +192,6 @@ function deleteTable(){
 }
 
 
-
 function start(){
   getCurrNamesFromServer()
   getMainRatesFromServer()
@@ -200,4 +199,5 @@ function start(){
 }
 
 
-$( document ).ready(start);
+$(document).ready(start);
+$(document).ready(function(){$("input.autocompleteOff").attr("autocomplete","off");})

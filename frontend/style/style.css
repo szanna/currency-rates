@@ -5,12 +5,12 @@ body {
 
 #mainNav a {
   color: #EDCDED;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 #mainNav a:hover {
   color: #EDCDED;
-  font-size: 21px;
+  font-size: 17px;
   text-decoration: none;
 }
 
@@ -20,6 +20,9 @@ body {
 
 .navbar-main-text {
   color: #EDCDED;
+}
+
+h1 {
   font-size: 27px;
 }
 
@@ -28,9 +31,12 @@ body {
   color: #EDCDED;
 }
 
+#shortRates {
+  background-color: #130A1F;
+}
+
 .cardsTodayRate {
   background-color: #1D1128;
-  margin-top: 110px;
   height: 160px;
   border-radius: 5px;
   color: #CCC9DC;
@@ -38,7 +44,6 @@ body {
 
 .today {
   text-align: left;
-  padding: 0;
   font-size: 14px;
   color: #776D7E;
 }
@@ -46,7 +51,7 @@ body {
 .curr-name {
   text-align: left;
   padding: 0;
-  font-size: 17px;
+  font-size: 19px;
 }
 
 .curr-rate {
@@ -58,14 +63,28 @@ body {
   background-color: #1B2A41;
 }
 
-p {
+h4 {
   margin: 1px;
 }
 
+h3 {
+  margin: 1px;
+}
+
+h6 {
+  margin: 1px;
+}
+
+.curr-rate-name {
+  font-size: 14px;
+}
+
 /* --------- card with forms styling ---------- */
+#searchPanel {
+  background-color: #130A1F;
+}
+
 .card {
-  margin-top: 60px;
-  height: 220px;
   background-color: #1D1128;
   color: #CCC9DC;
   border-radius: 5px;
@@ -122,13 +141,20 @@ p {
 }
 
 /* --------- table styling ---------- */
+.table-custom {
+  background-color: #1D1128;
+  border-radius: 5px;
+  font-size: 17px;
+}
+
 .table {
-  margin-top: 50px;
   color: #CCC9DC;
+  margin-bottom: 100px;
+  margin-top: 100px;
 }
 
 .table.table-condensed tr th {
-  border-bottom: 1px solid #1B2A41;
+  border-bottom: 2px solid #1B2A41;
   border-top: none;
 }
 
@@ -197,6 +223,16 @@ p {
 
 .alert {
   font-size: 17px;
+}
+
+/* --------- footer styling ---------- */
+#footer {
+  color: #776D7E;
+  font-size: 15px;
+}
+
+.copyright {
+  font-size: 13px;
 }
 
 /*# sourceMappingURL=style.css.map */
