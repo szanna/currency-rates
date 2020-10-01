@@ -1,0 +1,46 @@
+version: "3.4"
+
+services:
+
+  letsencrypt-nginx-container:
+    container_name: 'letsencrypt-nginx-container'
+    image: nginx:1.15.6
+    ports:
+    - "80:80"
+    volumes:
+    - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    - ./letsencrypt-site:/usr/share/nginx/html
+    - certbot-www:/usr/share/letsencrypt
+    networks:
+    - docker-network
+
+  # Obtaining SSL Certificates and Credentials
+  # Run first time with --staging.
+  # After obtaining cert remove --staging and add --force-renewal and
+  # Run to recreate container docker-compose up --force-recreate --no-deps certbot
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+    - certbot-www:/usr/share/letsencrypt
+    - certbot-etc:/etc/letsencrypt
+    - certbot-var:/var/lib/letsencrypt
+    - .:/var/log/letsencrypt
+    depends_on:
+    - letsencrypt-nginx-container
+    command: certonly --webroot --webroot-path=/usr/share/letsencrypt --email luk8dev@gmail.com --agree-tos --no-eff-email --staging -d nbpkursy.pl  -d www.nbpkursy.pl
+    #command: certonly --webroot --webroot-path=/usr/share/letsencrypt --email luk8dev@gmail.com --agree-tos --no-eff-email --force-renewal -d nbpkursy.pl  -d www.nbpkursy.pl
+
+
+networks:
+  docker-network:
+    driver: bridge
+
+volumes:
+  certbot-etc:
+    name: certbot-etc
+  certbot-var:
+    name: certbot-var
+  certbot-www:
+    name: certbot-www
+
