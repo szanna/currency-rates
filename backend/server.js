@@ -6,8 +6,8 @@ const askingRatesCache = require('./getAskingRatesCache.js')
 const common = require('./common.js')
 const httpGet = common.httpGet
 
-const hostname = '192.168.2.6';
-const port = 3001;
+const hostname = '0.0.0.0';
+const port = 3000;
 
 /**
     SERVER LOGIC

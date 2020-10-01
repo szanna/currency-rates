@@ -1,0 +1,37 @@
+version: "3.4"
+
+services:
+
+  nbp-service:
+    build: backend
+    restart: always
+    container_name: back
+
+  nbp-front:
+    build: frontend
+    restart: always
+    container_name: front
+    depends_on:
+      - nbp-service
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - certbot-www:/usr/share/letsencrypt
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - dhparam:/etc/ssl/certs
+
+volumes:
+  certbot-etc:
+    name: certbot-etc
+  certbot-var:
+    name: certbot-var
+  certbot-www:
+    name: certbot-www
+  dhparam:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/anna/dhparam/
+      o: bind
