@@ -4,11 +4,13 @@ services:
 
   nbp-service:
     build: backend
+    image: nbp-back:${VER}
     restart: always
     container_name: back
 
   nbp-front:
     build: frontend
+    image: nbp-front:${VER}
     restart: always
     container_name: front
     depends_on:
@@ -20,7 +22,7 @@ services:
       - certbot-www:/usr/share/letsencrypt
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
-      - dhparam:/etc/ssl/certs
+      - /etc/ssl/certs:/etc/ssl/certs:ro
 
 volumes:
   certbot-etc:
@@ -29,9 +31,4 @@ volumes:
     name: certbot-var
   certbot-www:
     name: certbot-www
-  dhparam:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/anna/dhparam/
-      o: bind
+    
