@@ -1,0 +1,63 @@
+# This is a basic workflow that is manually triggered
+
+name: Update SSL Cert
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      name:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Person to greet'
+        # Default value if no value is explicitly provided
+        default: 'World'
+        # Input has to be provided for the workflow to run
+        required: true
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "greet"
+  greet:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Runs a single command using the runners shell
+    - name: Configure SSH
+      run: |
+        mkdir -p ~/.ssh/
+        echo "$SSH_KEY" > ~/.ssh/staging.key
+        chmod 600 ~/.ssh/staging.key
+        cat >>~/.ssh/config <<END
+        Host nbpvps
+          HostName $SSH_HOST
+          User $SSH_USER
+          IdentityFile ~/.ssh/staging.key
+          StrictHostKeyChecking no
+        END
+      env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+      
+    - uses: actions/checkout@v2
+      with:
+        ref: docker-ssl
+    - name: docker-compose version
+      run: docker-compose -v
+      
+    - name: add workaround for https://github.com/docker/compose/issues/7542
+      run: |        
+        sudo sed -i 's/MaxSessions.*/MaxSessions 50/' /etc/ssh/sshd_config
+        sudo service ssh restart
+        
+    - name: Test1
+      run: |        
+        cd ssl
+        pwd
+        DOCKER_HOST="ssh://ubuntu@nbpvps" docker-compose up --abort-on-container-exit
+        DOCKER_HOST="ssh://ubuntu@nbpvps" docker-compose stop
+        
