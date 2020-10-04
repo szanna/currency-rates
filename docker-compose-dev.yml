@@ -1,0 +1,8 @@
+version: "3.4"
+
+services:
+  nbp-front:
+    volumes:
+      - /tmp/cert:/etc/letsencrypt/live/nbpkursy.pl
+      - /tmp/dhparam:/etc/ssl/certs:ro
+

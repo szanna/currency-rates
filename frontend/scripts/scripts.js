@@ -4,7 +4,7 @@ function getCurrNamesFromServer(){
     currencyListDropdown(data)
   }
 
-  var get = $.get( "http://192.168.2.6:3001/currencynames", response)
+  var get = $.get( "https://nbpkursy.pl/api/currencynames", response)
 }
 
 function getMainRatesFromServer(){
@@ -13,7 +13,7 @@ function getMainRatesFromServer(){
     showDiffRates(data)
   }
 
-  var get = $.get( "http://192.168.2.6:3001/maincurrencies", response)
+  var get = $.get( "https://nbpkursy.pl/api/maincurrencies", response)
 }
 
 // --------send stuff to server-----------//
@@ -22,7 +22,7 @@ function sendSelectedDataToServer(reqData){
   function newTable (resData){
     showTable(resData)
   }
-   $.post( "http://192.168.2.6:3001/table", JSON.stringify(reqData), newTable)
+   $.post( "https://nbpkursy.pl/api/table", JSON.stringify(reqData), newTable)
 }
 
 
