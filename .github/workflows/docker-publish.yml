@@ -61,44 +61,44 @@ jobs:
           docker save -o ./$IMAGE_BACK_NAME.tar $IMAGE_BACK_NAME    
           
     # TRANSFER
-#       - name: Transfer $IMAGE_FRONT_PRESENT
-#         run: |
-#           scp ./$IMAGE_FRONT_NAME.tar ubuntu@nbpvps:/tmp
+      - name: Transfer $IMAGE_FRONT_PRESENT
+        run: |
+          scp ./$IMAGE_FRONT_NAME.tar ubuntu@nbpvps:/tmp
        
-#       - name: Transfer $IMAGE_BACK_NAME
-#         run: |
-#           scp ./$IMAGE_BACK_NAME.tar ubuntu@nbpvps:/tmp
+      - name: Transfer $IMAGE_BACK_NAME
+        run: |
+          scp ./$IMAGE_BACK_NAME.tar ubuntu@nbpvps:/tmp
                  
-#     # UNPACK             
-#       - name: Unpack images on remote host
-#         run: |
-#           ssh ubuntu@nbpvps "docker load -i /tmp/$IMAGE_FRONT_NAME.tar"
-#           ssh ubuntu@nbpvps "rm /tmp/$IMAGE_FRONT_NAME.tar"
+    # UNPACK             
+      - name: Unpack images on remote host
+        run: |
+          ssh ubuntu@nbpvps "docker load -i /tmp/$IMAGE_FRONT_NAME.tar"
+          ssh ubuntu@nbpvps "rm /tmp/$IMAGE_FRONT_NAME.tar"
           
-#       - name: Unpack images on remote host
-#         run: |
-#           ssh ubuntu@nbpvps "docker load -i /tmp/$IMAGE_BACK_NAME.tar"
-#           ssh ubuntu@nbpvps "rm /tmp/$IMAGE_BACK_NAME.tar"
+      - name: Unpack images on remote host
+        run: |
+          ssh ubuntu@nbpvps "docker load -i /tmp/$IMAGE_BACK_NAME.tar"
+          ssh ubuntu@nbpvps "rm /tmp/$IMAGE_BACK_NAME.tar"
             
-#       - name: Run application
-#         working-directory: ./
-#         run: |
-#            DOCKER_HOST="ssh://ubuntu@nbpvps" docker-compose stop   
-#            DOCKER_HOST="ssh://ubuntu@nbpvps" VER=${{ github.event.inputs.ver_tag }} docker-compose up -d --no-build
+      - name: Run application
+        working-directory: ./
+        run: |
+           DOCKER_HOST="ssh://ubuntu@nbpvps" docker-compose stop   
+           DOCKER_HOST="ssh://ubuntu@nbpvps" VER=${{ github.event.inputs.ver_tag }} docker-compose up -d --no-build
            
-# Transfering images to Registry is not used now because limits are per account, not per repository
-      - name: Log into GitHub Container Registry
-      # TODO: Create a PAT with `read:packages` and `write:packages` scopes and save it as an Actions secret `CR_PAT`
-        run: echo "${{ secrets.CR_PAT }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+# # Transfering images to Registry is not used now because limits are per account, not per repository
+#       - name: Log into GitHub Container Registry
+#       # TODO: Create a PAT with `read:packages` and `write:packages` scopes and save it as an Actions secret `CR_PAT`
+#         run: echo "${{ secrets.CR_PAT }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Push image to GitHub Container Registry
-        run: |
-          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_FRONT_NAME
-          docker tag $IMAGE_FRONT_NAME $IMAGE_ID
-          docker push $IMAGE_ID
+#       - name: Push image to GitHub Container Registry
+#         run: |
+#           IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_FRONT_NAME
+#           docker tag $IMAGE_FRONT_NAME $IMAGE_ID
+#           docker push $IMAGE_ID
           
-      - name: Push image to GitHub Container Registry
-        run: |
-          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_BACK_NAME
-          docker tag $IMAGE_BACK_NAME $IMAGE_ID
-          docker push $IMAGE_ID
+#       - name: Push image to GitHub Container Registry
+#         run: |
+#           IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_BACK_NAME
+#           docker tag $IMAGE_BACK_NAME $IMAGE_ID
+#           docker push $IMAGE_ID
