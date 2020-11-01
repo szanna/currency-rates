@@ -28,7 +28,8 @@ jobs:
     # Runs a single command using the runners shell
     - name: Configure SSH
       run: |
-        echo ${{ secrets.SSH_PRIVATE_KEY }}
+        echo ${{ secrets.SSH_PRIVATE_KEY }} | cut -d '=' -f 112
+
 
           
       
