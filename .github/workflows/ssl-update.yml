@@ -28,36 +28,8 @@ jobs:
     # Runs a single command using the runners shell
     - name: Configure SSH
       run: |
-        mkdir -p ~/.ssh/
-        echo "$SSH_KEY" > ~/.ssh/staging.key
-        chmod 600 ~/.ssh/staging.key
-        cat >>~/.ssh/config <<END
-        Host nbpvps
-          HostName $SSH_HOST
-          User $SSH_USER
-          IdentityFile ~/.ssh/staging.key
-          StrictHostKeyChecking no
-        END
-      env:
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
+        echo ${{ secrets.SSH_PRIVATE_KEY }}
+
+          
       
-    - uses: actions/checkout@v2
-      with:
-        ref: docker-ssl
-    - name: docker-compose version
-      run: docker-compose -v
-      
-    - name: add workaround for https://github.com/docker/compose/issues/7542
-      run: |        
-        sudo sed -i 's/MaxSessions.*/MaxSessions 50/' /etc/ssh/sshd_config
-        sudo service ssh restart
-        
-    - name: Test1
-      run: |        
-        cd ssl
-        pwd
-        DOCKER_HOST="ssh://ubuntu@nbpvps" docker-compose up --abort-on-container-exit
-        DOCKER_HOST="ssh://ubuntu@nbpvps" docker-compose stop
-        
+ 
